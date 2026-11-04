@@ -9,15 +9,13 @@ public class SearchEngine {
         this.searchable = new Searchable[size];
     }
 
-    static int itemCounter = 0;
     public void add(Searchable item) {
-        if (itemCounter >= searchable.length) {
-            return;
+        for (int i = 0; i < searchable.length; i++) {
+            if (searchable[i] == null) {
+                searchable[i] = item;
+                break;
+            }
         }
-        if (searchable[itemCounter] == null) {
-            searchable[itemCounter] = item;
-        }
-        itemCounter++;
     }
 
     public Searchable[] search(String searchTerm) {
