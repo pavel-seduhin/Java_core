@@ -79,7 +79,7 @@ public class App {
         Article article2 = new Article("Молоко", "Простоквашино, отборное, пастеризованное, 1.5л.");
         Article article3 = new Article("Хлеб", "Чёрный, формовой, бездрожжевой, 450гр.");
         Article article4 = new Article("Сыр", "Российский, жирность 45%, 200гр.");
-        Article article5 = new Article("Колбаса", "Варёная, Докторская, 250гр.");
+        Article article5 = new Article("Колбаса", "Варёная, Докторская, 380гр.");
         Article article6 = new Article("Пиво", "Тёмное, нефильтрованное, 500гр.");
 
         //Добавление статей в массив для поиска

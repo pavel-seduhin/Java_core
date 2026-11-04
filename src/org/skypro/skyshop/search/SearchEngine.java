@@ -4,15 +4,16 @@ public class SearchEngine {
 
 
     private Searchable[] searchable;
-    private int size;
 
     public SearchEngine(int size) {
-        this.size = size;
         this.searchable = new Searchable[size];
     }
 
     static int itemCounter = 0;
     public void add(Searchable item) {
+        if (itemCounter >= searchable.length) {
+            return;
+        }
         if (searchable[itemCounter] == null) {
             searchable[itemCounter] = item;
         }
