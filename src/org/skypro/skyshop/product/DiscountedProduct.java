@@ -9,15 +9,23 @@ public class DiscountedProduct extends Product{
         try {
             checkDiscountProductPriceData(basePrice, discountInWholePercent);
         } catch (IllegalArgumentException e) {
-            System.out.println("Неверные данные о цене продукта " + "\""+ productName + "\"");
+            System.out.println("Неверные данные о цене продукта " + "\"" + productName + "\" " + e.getMessage());
         }
         this.basePrice = basePrice;
         this.discountInWholePercent = discountInWholePercent;
     }
 
     private static void checkDiscountProductPriceData(int basePrice, byte discountInWholePercent) throws IllegalArgumentException {
-        if (basePrice < 1 || discountInWholePercent < 0 || discountInWholePercent > 100) {
-            throw new IllegalArgumentException();
+        if (basePrice < 1) {
+            throw new IllegalArgumentException(" - Цена продукта не должна быть меньше 1");
+        }
+
+        if (discountInWholePercent < 0) {
+            throw new IllegalArgumentException(" - Величина скидки не может быть меньше 0");
+        }
+
+        if (discountInWholePercent > 100) {
+            throw new IllegalArgumentException(" - Величина скидки не может быть больше 100");
         }
     }
 

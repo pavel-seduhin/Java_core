@@ -15,7 +15,7 @@ public abstract class Product implements Searchable {
     }
 
     private static void checkName (String productName) throws IllegalArgumentException {
-        if (productName.isBlank()) {
+        if (productName == null || productName.isBlank()) {
             throw new IllegalArgumentException();
         }
     }

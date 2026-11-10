@@ -103,12 +103,13 @@ public class App {
 
         //Проверка выбрасывания исключений
         System.out.println("\nПроверка выбрасывания исключений");
-        Product product7 = new SimpleProduct("", 140);
-        Product product8 = new SimpleProduct(" ", 140);
-        Product product9 = new SimpleProduct("Творог", 0);
-        Product product10 = new DiscountedProduct("Сок", 0, (byte) 20);
-        Product product11 = new DiscountedProduct("Сахар", 79, (byte) 110);
-        Product product12 = new DiscountedProduct("Соль", 60, (byte) -5);
+        Product product7 = new SimpleProduct(null, 140);
+        Product product8 = new SimpleProduct("", 140);
+        Product product9 = new SimpleProduct(" ", 140);
+        Product product10 = new SimpleProduct("Творог", 0);
+        Product product11 = new DiscountedProduct("Сок", 0, (byte) 20);
+        Product product12 = new DiscountedProduct("Сахар", 79, (byte) 110);
+        Product product13 = new DiscountedProduct("Соль", 60, (byte) -5);
 
         //Демонстрация поиска существующего объекта
         System.out.println("\nДемонстрация поиска существующего объекта");
