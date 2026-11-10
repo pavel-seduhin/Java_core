@@ -6,8 +6,19 @@ public class DiscountedProduct extends Product{
 
     public DiscountedProduct(String productName, int basePrice, byte discountInWholePercent) {
         super(productName);
+        try {
+            checkDiscountProductPriceData(basePrice, discountInWholePercent);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Неверные данные о цене продукта " + "\""+ productName + "\"");
+        }
         this.basePrice = basePrice;
         this.discountInWholePercent = discountInWholePercent;
+    }
+
+    private static void checkDiscountProductPriceData(int basePrice, byte discountInWholePercent) throws IllegalArgumentException {
+        if (basePrice < 1 || discountInWholePercent < 0 || discountInWholePercent > 100) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -17,7 +28,7 @@ public class DiscountedProduct extends Product{
 
     @Override
     public String toString() {
-        return getProductName() + ": " + getProductPrice() + " (" + discountInWholePercent + "%)";
+        return getProductName() + ": " + getProductPrice() + "руб." + " (" + discountInWholePercent + "%)";
     }
 
     @Override
