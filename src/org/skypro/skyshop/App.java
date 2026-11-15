@@ -33,10 +33,6 @@ public class App {
         productBasket.addProductToBasket(product4);
         productBasket.addProductToBasket(product5);
 
-        //Добавление продукта в заполненную корзину
-        System.out.println("\nДобавление продукта в заполненную корзину:");
-        productBasket.addProductToBasket(product6);
-
         //Печать содержимого корзины
         System.out.println("\nПечать содержимого корзины:");
         productBasket.printBasketContents();
@@ -50,22 +46,22 @@ public class App {
         System.out.println(productBasket.searchProductInBasket("Пиво"));
 
         //Очистка корзины
-        productBasket.makeBasketEmpty();
+//        productBasket.makeBasketEmpty();
 
         //Печать содержимого пустой корзины
-        System.out.println("\nПечать содержимого пустой корзины:");
-        productBasket.printBasketContents();
+//        System.out.println("\nПечать содержимого пустой корзины:");
+//        productBasket.printBasketContents();
 
         //Получение стоимости пустой корзины
-        System.out.println("\nПолучение стоимости пустой корзины:");
-        System.out.println("Итого: " + productBasket.calculateBasketPrice());
+//        System.out.println("\nПолучение стоимости пустой корзины:");
+//        System.out.println("Итого: " + productBasket.calculateBasketPrice());
 
         //Поиск товара по имени в пустой корзине
-        System.out.println("\nПоиск товара по имени в пустой корзине:");
-        System.out.println(productBasket.searchProductInBasket("Хлеб"));
+//        System.out.println("\nПоиск товара по имени в пустой корзине:");
+//        System.out.println(productBasket.searchProductInBasket("Хлеб"));
 
         //Создание массива элементов для поиска
-        SearchEngine itemsArray = new SearchEngine(12);
+        SearchEngine itemsArray = new SearchEngine();
 
         //Добавление товаров для поиска в массив
         itemsArray.add(product1);
@@ -93,13 +89,8 @@ public class App {
 
         //Поиск товара и статьи
         System.out.println("\nПоиск товара и статьи");
-        Searchable[] foundedItems = itemsArray.search("Колбаса");
-        for (Searchable foundedItem : foundedItems) {
-            if (foundedItem != null) {
-                foundedItem.getStringRepresentation();
-                System.out.println(foundedItem);
-            }
-        }
+        itemsArray.search("Колбаса");
+        itemsArray.printSearchResult(itemsArray.foundedItems);
 
         //Проверка выбрасывания исключений
         System.out.println("\nПроверка выбрасывания исключений");
@@ -128,5 +119,29 @@ public class App {
         } catch (BestResultNotFound e) {
             System.out.println(e.getMessage());
         }
+
+        //Проверка, есть ли удалённые продукты
+        System.out.println("\nПроверка, есть ли удалённые продукты");
+        productBasket.printRemovedProducts(productBasket.removedProducts);
+
+        //Удаление продуктов из корзины
+        productBasket.removeProduct("Хлеб");
+        productBasket.removeProduct("Молоко");
+
+        //Список удалённых продуктов
+        System.out.println("\nСписок удалённых продуктов");
+        productBasket.printRemovedProducts(productBasket.removedProducts);
+
+        //Печать содержимого корзины
+        System.out.println("\nПечать содержимого корзины:");
+        productBasket.printBasketContents();
+
+        //Удаление несуществующего продукта
+        System.out.println("\nУдаление несуществующего продукта");
+        productBasket.removeProduct("Хлеб");
+
+        //Печать содержимого корзины
+        System.out.println("\nПечать содержимого корзины:");
+        productBasket.printBasketContents();
     }
 }
