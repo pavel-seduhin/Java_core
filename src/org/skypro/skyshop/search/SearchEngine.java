@@ -1,5 +1,7 @@
 package org.skypro.skyshop.search;
 
+import org.skypro.skyshop.exception.BestResultNotFound;
+
 public class SearchEngine {
 
 
@@ -34,5 +36,32 @@ public class SearchEngine {
             }
         }
         return foundedItems;
+    }
+
+    public Searchable searchBestResult(String search) throws BestResultNotFound {
+        Searchable bestResult = null;
+        int maxQty = 0;
+        for (Searchable item : searchable) {
+            int searchIndex = 0;
+            int index = 0;
+            int qty = 0;
+
+            while (searchIndex != -1) {
+                searchIndex = item.getSearchTerm().toLowerCase().indexOf(search.toLowerCase(), index);
+                index = searchIndex + search.length();
+                if (index >= search.length()) {
+                    qty++;
+                }
+            }
+            if (qty > maxQty) {
+                maxQty = qty;
+                bestResult = item;
+            }
+
+            }
+        if (bestResult == null) {
+            throw new BestResultNotFound("Поиск не принёс результата");
+        }
+        return bestResult;
     }
 }

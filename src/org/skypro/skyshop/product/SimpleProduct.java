@@ -5,7 +5,18 @@ public class SimpleProduct extends Product {
 
     public SimpleProduct(String productName, int productPrice) {
         super(productName);
+        try {
+            checkProductPrice(productPrice);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Неверная цена продукта " + "\""+ productName + "\"");
+        }
         this.productPrice = productPrice;
+    }
+
+    private static void checkProductPrice (int productPrice) throws IllegalArgumentException {
+        if (productPrice < 1) {
+            throw new IllegalArgumentException();
+        }
     }
 
     @Override
@@ -15,7 +26,7 @@ public class SimpleProduct extends Product {
 
     @Override
     public String toString() {
-        return getProductName() + ": " + getProductPrice();
+        return getProductName() + ": " + getProductPrice() + "руб.";
     }
 
     @Override
