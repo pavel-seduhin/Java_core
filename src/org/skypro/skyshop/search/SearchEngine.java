@@ -2,40 +2,36 @@ package org.skypro.skyshop.search;
 
 import org.skypro.skyshop.exception.BestResultNotFound;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
 public class SearchEngine {
 
 
-    private Searchable[] searchable;
-
-    public SearchEngine(int size) {
-        this.searchable = new Searchable[size];
-    }
+    private List<Searchable> searchable = new LinkedList<>();
 
     public void add(Searchable item) {
-        for (int i = 0; i < searchable.length; i++) {
-            if (searchable[i] == null) {
-                searchable[i] = item;
-                break;
+        searchable.add(item);
+    }
+
+    public List<Searchable> foundedItems = new ArrayList<>();
+
+    public void search(String searchTerm) {
+        Iterator<Searchable> iterator = searchable.iterator();
+        while (iterator.hasNext()){
+            Searchable item = iterator.next();
+            if (item.getSearchTerm().contains(searchTerm)) {
+                foundedItems.add(item);
             }
         }
     }
 
-    public Searchable[] search(String searchTerm) {
-        Searchable[] foundedItems = new Searchable[5];
-        int counterOfFoundedItems = 0;
-        for (Searchable item : searchable) {
-            if (counterOfFoundedItems == 5) {
-                break;
-            }
-            if (item == null) {
-                continue;
-            }
-            if (item.getSearchTerm().contains(searchTerm)) {
-                foundedItems[counterOfFoundedItems] = item;
-                counterOfFoundedItems++;
-            }
+    public void printSearchResult(List<Searchable> foundedItems) {
+        for (Searchable result : foundedItems) {
+            System.out.println(result);
         }
-        return foundedItems;
     }
 
     public Searchable searchBestResult(String search) throws BestResultNotFound {

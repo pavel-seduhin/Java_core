@@ -2,19 +2,13 @@ package org.skypro.skyshop.basket;
 
 import org.skypro.skyshop.product.Product;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class ProductBasket {
-    private final Product[] productBasket = new Product[5];
-    int productCounter = 0;
+    private List<Product> productBasket = new LinkedList<>();
 
     public void addProductToBasket(Product product) {
-        if (productCounter >= productBasket.length) {
-            System.out.println("Невозможно добавить продукт");
-        } else if (productBasket[productCounter] == null) {
-            productBasket[productCounter] = product;
-        }
-        productCounter++;
+        productBasket.add(product);
     }
 
     public int calculateBasketPrice() {
@@ -73,7 +67,33 @@ public class ProductBasket {
     }
 
     public void makeBasketEmpty() {
-        Arrays.fill(productBasket, null);
+        productBasket.clear();
+    }
+
+    public List<Product> removedProducts = new LinkedList<>();
+
+    public void removeProduct(String name) {
+        int removedProductsCount = 0;
+        Iterator<Product> iterator = productBasket.iterator();
+        while (iterator.hasNext()) {
+            Product product = iterator.next();
+            if (product.getProductName().equals(name)) {
+                removedProducts.add(product);
+                iterator.remove();
+                removedProductsCount++;
+            }
+        }
+        if (removedProductsCount == 0) {
+            System.out.println("Такого продукта нет в корзине");
+        }
+    }
+
+    public void printRemovedProducts(List<Product> removedProducts) {
+        if (removedProducts.isEmpty()) {
+            System.out.println("Список удалённых продуктов пуст");
+        } else {
+        for (Product product : removedProducts) { System.out.println(product); }
+        }
     }
 }
 
